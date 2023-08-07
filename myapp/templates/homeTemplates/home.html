@@ -1,0 +1,14 @@
+{% extends 'homeTemplates/base.html' %}
+{% load static %}
+
+{%block content%}
+{%include 'Tables/QuestionsTable.html'%}
+{%include 'Modals/addQuestionModal.html'%}
+{%include 'Modals/addApproachModal.html'%}
+{% endblock content%}
+
+{% block addStaticFiles%}
+<script src="{% static 'js/Tables/QuestionsTable.js' %}"></script>
+<script src="{% static 'js/Modal/addQuestion.js' %}"></script>
+<script src="{% static 'js/Modal/addApproach.js' %}"></script>
+{% endblock addStaticFiles%}

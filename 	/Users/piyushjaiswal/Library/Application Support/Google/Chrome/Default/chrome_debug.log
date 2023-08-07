@@ -1,0 +1,4 @@
+[96844:259:0720/234330.373963:WARNING:chrome_main_delegate.cc(594)] This is Chrome version 115.0.5790.98 (not a warning)
+[96844:259:0720/234330.895749:INFO:chrome_browser_cloud_management_controller.cc(167)] Starting CBCM Controller Initialization
+[96844:259:0720/234330.895802:INFO:chrome_browser_cloud_management_controller.cc(195)] No machine level policy manager exists.
+[96844:259:0720/234332.570859:WARNING:pref_notifier_impl.cc(41)] Pref observer for media_router.cast_allow_all_ips found at shutdown.

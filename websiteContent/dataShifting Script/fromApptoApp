@@ -1,0 +1,86 @@
+import os
+import sys
+import django
+project_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(project_path)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ZenCoders.settings")
+django.setup()
+
+from websiteContent.models import *
+from myapp.models import *
+
+def fromApptoApp():
+    #get all topics from websitecontent
+    
+    topics = WTopic.objects.all()
+    for topic in topics:
+    #create a new topic in myapp
+        topic_myapp = Topic()
+        topic_myapp.name = topic.name
+        topic_myapp.description = topic.description
+        topic_myapp.save()
+        questions = WQuestion.objects.filter(topic=topic)
+        for question in questions:
+            #only if question contains an at least one approach
+            if(WApproach.objects.filter(question=question).count()==0):
+                continue
+            
+            question_myapp = Question()
+            question_myapp.name = question.name
+            question_myapp.description = question.description
+            question_myapp.topic = topic_myapp
+            question_myapp.save()
+            approaches = WApproach.objects.filter(question=question)
+            for approach in approaches:
+                approach_myapp = Approach(question=question_myapp)
+                #count the number of approaches
+                approach_myapp.sequence = Approach.objects.filter(question=question_myapp).count()+1
+                approach_myapp.name = approach.name
+                approach_myapp.content = approach.content
+                approach_myapp.description = approach.description
+                approach_myapp.save()
+        
+
+def fromApptoAppOne():
+    #get all topics from websitecontent
+    
+    topics = WTopic.objects.all()
+    for topic in topics:
+    #create a new topic in myapp
+        topic_myapp = Topic()
+        topic_myapp.name = topic.name
+        topic_myapp.description = topic.description
+        topic_myapp.save()
+        questions = WQuestion.objects.filter(topic=topic)
+        for question in questions:
+            question_myapp = Question()
+            question_myapp.name = question.name
+            question_myapp.description = question.description
+            question_myapp.topic = topic_myapp
+            question_myapp.save()
+            approaches = WApproach.objects.filter(question=question)
+            for approach in approaches:
+                approach_myapp = Approach(question=question_myapp)
+                #count the number of approaches
+                approach_myapp.sequence = Approach.objects.filter(question=question_myapp).count()+1
+                approach_myapp.name = approach.name
+                approach_myapp.content = approach.content
+                approach_myapp.description = approach.description
+                approach_myapp.save()
+   
+
+def deleteMyapp():
+    #delete all the data in myapp
+    Approach.objects.all().delete()
+    Question.objects.all().delete()
+    Topic.objects.all().delete()
+    Line.objects.all().delete()
+    
+def main():
+    deleteMyapp()
+    fromApptoApp()
+
+if __name__ == '__main__':
+    main()
+    
+    

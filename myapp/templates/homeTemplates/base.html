@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'homeTemplates/baseHead.html' %}
+  {% load static %}
+  <body>
+     {% block content %}{% endblock content %}
+    {% include 'homeTemplates/baseStaticFiles.html' %}
+    {% block addStaticFiles %}{% endblock%}
+  </body>
+</html>

@@ -1,0 +1,34 @@
+I am learing dsa using cpp language. 
+i am going to provide you with a link of a question you have to give me the question description and the solution of the question in the 
+following format:
+question description:
+here goes the question description
+solution:
+here goes the solution code of the question
+
+example:
+question description:
+Problem Statement: Given an array of N integers, write a program to implement the Selection sorting algorithm.
+
+solution:
+void selection_sort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int mini = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[mini]) {
+                mini = j;
+            }
+        }
+        int temp = arr[mini];
+        arr[mini] = arr[i];
+        arr[i] = temp;
+    }
+}
+
+
+you don't have to give anything other than this because i am going to run a python script to get this in django model so do no provide anything else other than this.
+In the solution code please provide the optimal solution excluding the main function.I want just the general solution for every code .Please don't provide any explaination.
+
+this is the link:
+
+

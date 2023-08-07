@@ -1,0 +1,38 @@
+{% extends 'homeTemplates/base.html' %} {% load static %} {%block content%}
+
+
+<div >
+  <h1 class="text-center">{{question.name}}</h1>
+</div>
+{% comment %} <div class="row">
+  <p>{{question.description}}</p>
+</div> {% endcomment %}
+  <div class="row Commader">
+    <div class="col-2">
+      <!--Play button -->
+      <button id="play_button" value="false" class="btn btn-success mt-3">Play</button>
+    </div>
+    <div class="col-7">
+    </div>
+    <div class="col-3">
+      <label for="approachSelect">Select Approach:</label>
+      <select name="approaches" id="approachSelect">
+        {% for approach in approaches %}
+        <option value="{{ approach.id }}">{{ approach.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+<!--Add the LBLModal using static files-->
+{% include 'Modals/LBLModal.html' %}
+<!--Add the DND using static files-->
+{% include 'Modals/DNDModal.html' %}
+
+  <button id="submit-btn" style="display:none;" class="btn btn-primary mt-3">Submit</button>
+{% endblock %}
+ {% block addStaticFiles %}
+<script src="{% static 'js/Modal/LBLModal.js' %}"></script>
+<script src="{% static 'js/Modal/DNDModal.js' %}"></script>
+<script src="{% static 'js/Utilities/differentApproach.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/otherStyles/dragAndDrop.css' %}" />
+{%endblock%}
