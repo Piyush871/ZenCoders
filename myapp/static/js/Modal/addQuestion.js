@@ -27,30 +27,35 @@ function saveQuestion(event) {
   var questionName = $("#addQuestionModal #QuestionName").val();
   var description = $("#addQuestionModal #description").val();
   var topic = $("#addQuestionModal #topic").val();
-  var success = false;
-  window.makeRequest({
-    url: "/api/addQuestion/" + topic + "/",
-    method: "POST",
-    body: JSON.stringify({
-      name: questionName,
-      description: description,
-      topic: topic,
-    }),
-    onSuccess: function (data) {
-      alert("Question added successfully");
-      $("#addApproachModal").attr("data-id", data.id);
-      $("#addQuestionModal").modal("hide");
-      success = true;
-      window.fetchData(tableId, myTable, url, searchUrl, columns, (query = ""));
-    },
-    onNetError: function (error) {
-      console.error("Network error:", error);
-    },
-    onErrorMessage: function (message) {
-      console.error("Application error:", message);
-    },
+
+  return new Promise((resolve, reject) => {
+    window.makeRequest({
+      url: "/api/addQuestion/" + topic + "/",
+      method: "POST",
+      body: JSON.stringify({
+        name: questionName,
+        description: description,
+        topic: topic,
+      }),
+      onSuccess: function (data) {
+        alert("Question added successfully");
+        console.log("data",data);
+        console.log("data.id", data.id);
+        $("#addApproachModal").attr("data-id", data.id);
+        $("#addQuestionModal").modal("hide");
+        window.fetchDataAsync(tableId, myTable, url, searchUrl, columns, (query = ""));
+        resolve(true); // Success
+      },
+      onNetError: function (error) {
+        console.error("Network error:", error);
+        reject(false); // Failure
+      },
+      onErrorMessage: function (message) {
+        console.error("Application error:", message);
+        reject(false); // Failure
+      },
+    });
   });
-  return success;
 }
 
 $("#addQuestionModal").on("hidden.bs.modal", function () {
@@ -62,11 +67,14 @@ $("#addQuestionModal").on("hidden.bs.modal", function () {
 document
   .querySelector("#addQuestionModal #save_and_add_app_button")
 .addEventListener("click", function (event) {
-    if(saveQuestion(event))
-    {
-            //show the modal addAppraochModal
-            $('#addApproachModal').modal('show');
-
+  saveQuestion(event).then((success) => {
+    if (success) {
+      //show the addApproachModal
+      $("#addApproachModal").modal("show");
+    } else {
+      //nothing to do 
     }
-    return 
+  }).catch((error) => {
+    // Handle error
+  });
 });

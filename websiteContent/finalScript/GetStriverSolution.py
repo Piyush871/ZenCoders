@@ -33,12 +33,13 @@ for (let i = 0; i < arrows.length; i++) {
 
 def insertData(question,approaches):
     #create a approach model
+    if approaches==None:
+        return
     for approach in approaches:
         approach =trimText(approach)
         approach_obj = WApproach(question=question)
         approach_obj.sequence = WApproach.objects.filter(question=question).count()+1
         approach_obj.name = 'Approach '+str(WApproach.objects.filter(question=question).count()+1)
-        description = ''
         approach_obj.content = approach
         approach_obj.save()
         #insert the lines 
@@ -53,7 +54,7 @@ def getData(driver,link):
             driver.execute_script(javascript_code)
         except:
             print('error in executing javascript code')
-        time.sleep(5)
+        time.sleep(2)
         approaches=[]
         code_elements=driver.find_elements(By.CSS_SELECTOR,"code[lang=cpp]")
         for code_element in code_elements:

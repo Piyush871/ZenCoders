@@ -43,22 +43,28 @@ def fromApptoApp():
 
 def fromApptoAppOne():
     #get all topics from websitecontent
-    
+    questions_count = 0
     topics = WTopic.objects.all()
     for topic in topics:
     #create a new topic in myapp
+
         topic_myapp = Topic()
         topic_myapp.name = topic.name
         topic_myapp.description = topic.description
         topic_myapp.save()
         questions = WQuestion.objects.filter(topic=topic)
+        if(len(questions)==0):
+            print('no questions in topic '+topic.name)
         for question in questions:
+            questions_count+=1
             question_myapp = Question()
             question_myapp.name = question.name
             question_myapp.description = question.description
             question_myapp.topic = topic_myapp
             question_myapp.save()
             approaches = WApproach.objects.filter(question=question)
+            if(len(approaches)==0):
+                continue
             for approach in approaches:
                 approach_myapp = Approach(question=question_myapp)
                 #count the number of approaches
@@ -78,7 +84,7 @@ def deleteMyapp():
     
 def main():
     deleteMyapp()
-    fromApptoApp()
+    fromApptoAppOne()
 
 if __name__ == '__main__':
     main()

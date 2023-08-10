@@ -2,13 +2,24 @@
 {% load static %}
 
 {%block content%}
+<select name="topics" id="topicSelect">
+</select>
 {%include 'Tables/QuestionsTable.html'%}
 {%include 'Modals/addQuestionModal.html'%}
 {%include 'Modals/addApproachModal.html'%}
+{%include 'Modals/NoteModal.html'%}
 {% endblock content%}
-
 {% block addStaticFiles%}
+<!--order should be the 
+questin table 
+addQuestion
+addApproach 
+-->
+
+<script src="{% static 'js/Modal/NoteModal.js' %}"></script>
 <script src="{% static 'js/Tables/QuestionsTable.js' %}"></script>
 <script src="{% static 'js/Modal/addQuestion.js' %}"></script>
 <script src="{% static 'js/Modal/addApproach.js' %}"></script>
+<script src="{%static 'js/Basic/home.js'%}"></script>
+<link type="stylesheet" href="{% static 'css/Basic/home.css' %}"></link>
 {% endblock addStaticFiles%}

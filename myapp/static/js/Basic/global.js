@@ -172,7 +172,7 @@ window.fetchData = async function (
         if (event.key === "Enter") {
           const query = event.target.value;
           if (query.length >= 1 || query.length === 0) {
-            window.fetchData(
+            window.fetchDataAsync(
               tableId,
               myTable,
               searchUrl,
@@ -185,10 +185,13 @@ window.fetchData = async function (
         }
       });
     }
+    return Promise.resolve(true);
   } catch (error) {
     console.error("Error fetching data:", error);
+    return Promise.reject(false);
   }
-};
+};  
+
 
 window.fetchDataFilter = function (
   tableId,

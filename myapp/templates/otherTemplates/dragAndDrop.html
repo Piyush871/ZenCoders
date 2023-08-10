@@ -2,7 +2,12 @@
 
 
 <div >
+  <div class="row">
   <h1 class="text-center">{{question.name}}</h1>
+  <a href="{{w_links.leetcode_link}}" target="_blank" class="btn btn-primary">Leetcode</a>
+  <a href="{{w_links.striver_link}}" target="_blank" class="btn btn-primary">Striver</a>
+  <!--if using django html-->
+   
 </div>
 {% comment %} <div class="row">
   <p>{{question.description}}</p>
@@ -28,7 +33,6 @@
 <!--Add the DND using static files-->
 {% include 'Modals/DNDModal.html' %}
 
-  <button id="submit-btn" style="display:none;" class="btn btn-primary mt-3">Submit</button>
 {% endblock %}
  {% block addStaticFiles %}
 <script src="{% static 'js/Modal/LBLModal.js' %}"></script>

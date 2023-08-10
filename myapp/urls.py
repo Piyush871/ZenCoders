@@ -12,6 +12,11 @@ urlpatterns = [
     path('api/check_submit/<int:id>/',checkViews.check_submit_view,name='check_submit'),
     path('api/get_approach_lines/<int:id>', otherApis.get_approach_lines),
     path('api/addApproach/<int:id>', updatemodal.add_approach_view),
+    path('api/question_done/<int:id>', updatemodal.question_done_view),
+    path('api/question_important/<int:id>', updatemodal.question_important_view),
+    path('api/delete_questions/', updatemodal.delete_question_view),
+    path('api/question_add_note/<int:id>',updatemodal.question_add_note_view),
+    path('api/get_question_note/<int:id>',updatemodal.get_question_note_view),
     #To be implemented
     # path('api/updateApproach/<int:id>', updatemodal.update_approach_view),
     path('api/addQuestion/<str:topic>/', updatemodal.AddQuestionView.as_view(), name='add_question'),

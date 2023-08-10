@@ -1,11 +1,12 @@
 
-
-
-
 document.getElementById("save_and_add_next_app_button").addEventListener("click", function(event) {
     //get the questionId from the moadal
+
     var questionId = $('#addApproachModal').attr('data-id');
     saveApproach(event, questionId);
+    //now we have to brint the modal again
+    //show the modal addAppraochModal
+    $('#addApproachModal').modal('show');
 });
 
 document.getElementById("save_button_app").addEventListener("click", function(event) {
@@ -59,4 +60,8 @@ function saveApproach(event, questionId) {
             console.error('Error Message:', errorMessage);
         }
     });
+}
+
+window.addAppraoch = function() {
+    //get the 
 }

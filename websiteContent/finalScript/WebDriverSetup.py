@@ -26,6 +26,8 @@ class WebDriverSetup:
             options = Options()
             options.add_argument("user-data-dir=/Users/piyushjaiswal/Library/Application Support/Google/Chrome/newProfile")
             options.add_argument('--disable-blink-features=AutomationControlled')
+            #make this go headleass
+            options.add_argument("--headless")
             options.add_experimental_option("excludeSwitches", ["enable-automation"])
             options.add_experimental_option('useAutomationExtension', False)
             options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

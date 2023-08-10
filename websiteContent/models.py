@@ -3,17 +3,21 @@ from django.db import models
 # Create your models here.
 
 class WList(models.Model):
-    name=models.CharField(max_length=200,unique=True)
+    name=models.CharField(max_length=200,unique=True,primary_key=True)
 
 class WTopic(models.Model):
     name = models.CharField(max_length=200, primary_key=True)
     description = models.TextField()
-    list = models.ForeignKey(WList,on_delete=models.CASCADE,null=True,default='List1',blank=True)
+    list = models.ForeignKey(WList,on_delete=models.CASCADE,null=True,blank=True,default='List1')
 
 class WQuestion(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True,null=True)
     topic = models.ForeignKey(WTopic,on_delete=models.CASCADE,default='',null=True,blank=True)
+    notes = models.TextField(blank=True,null=True)
+    done = models.BooleanField(default=False)
+    important = models.BooleanField(default=False)
+    last_visited = models.DateTimeField(default=None, null=True,blank=True)
 
     def __str__(self):
         return self.name

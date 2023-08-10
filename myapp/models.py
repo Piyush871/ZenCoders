@@ -1,14 +1,20 @@
 from django.db import models
 
 # Create your models here.
+
+class List (models.Model):
+    name=models.CharField(max_length=200,unique=True,primary_key=True)
+
 class Topic(models.Model):
     name = models.CharField(max_length=200, primary_key=True)
     description = models.TextField()
-
+    list = models.ForeignKey(List,on_delete=models.CASCADE,null=True,blank=True,default='List1')
+    
 class Question(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True,null=True)
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL,default='',null=True,blank=True)
+    note = models.TextField(blank=True,null=True,default='')
     done = models.BooleanField(default=False)
     important = models.BooleanField(default=False)
     last_visited = models.DateTimeField(default=None, null=True)
